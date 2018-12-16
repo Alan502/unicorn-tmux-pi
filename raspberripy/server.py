@@ -7,15 +7,20 @@ import time
 r_shift = 0
 g_shift = 0
 b_shift = 0
+period_count = 0
+period = 1
 life = GameOfLife(r_shift, g_shift, b_shift)
 
 
 def run_unicorn_loop():
     global life
-    life.next_generation()
-    life.show_board()
-    if life.all_dead():
-        life = GameOfLife(r_shift, g_shift, b_shift)
+    global period_count
+    period_count = (period_count + 1) % period
+    if period_count == 0:
+        life.next_generation()
+        life.show_board()
+        if life.all_dead():
+            life = GameOfLife(r_shift, g_shift, b_shift)
 
 
 class S(BaseHTTPRequestHandler):
@@ -38,6 +43,7 @@ class S(BaseHTTPRequestHandler):
         global r_shift
         global g_shift
         global b_shift
+        global period
         self._set_headers()
         content_length = int(self.headers['Content-length'])
         in_text = self.rfile.read(content_length)
@@ -45,6 +51,7 @@ class S(BaseHTTPRequestHandler):
             r_shift = int(in_text[11])
             g_shift = int(in_text[13])
             b_shift = int(in_text[15])
+            period = int(in_text[17])
             life = GameOfLife(r_shift, g_shift, b_shift)
         if in_text.startswith('random'):
             pass
@@ -55,7 +62,7 @@ def run(server_class=HTTPServer, handler_class=S, port=61002):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print 'unicorn tmux pi running...'
-    httpd.timeout = 1
+    httpd.timeout = 0.1
     httpd.handle_timeout = run_unicorn_loop
     while True:
         httpd.handle_request()
