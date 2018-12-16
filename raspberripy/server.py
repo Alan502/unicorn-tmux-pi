@@ -1,7 +1,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
 import unicornhat as unicorn
-import game_of_life
+from game_of_life import GameOfLife
 
 
 class S(BaseHTTPRequestHandler):
