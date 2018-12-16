@@ -1,5 +1,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
+import unicornhat as unicorn
+import game_of_life
 
 
 class S(BaseHTTPRequestHandler):
@@ -19,8 +21,22 @@ class S(BaseHTTPRequestHandler):
 
     def do_POST(self):
         self._set_headers()
-        print self.rfile
-        self.wfile.write(self.rfile)
+        in_text = self.rfile.read()
+        if in_text.startswith('gameoflife'):
+            try:
+                shift = int(in_text[11])
+            except IndexError:
+                shift = 0
+        life = GameOfLife(shift)
+        while not life.all_dead():
+            life.next_generation()
+            life.show_board()
+            time.sleep(0.05)
+
+        if in_text.startswith('random'):
+            pass
+
+        self.wfile.write(in_text)
 
 
 def run(server_class=HTTPServer, handler_class=S, port=61002):
