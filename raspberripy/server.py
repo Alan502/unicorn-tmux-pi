@@ -11,6 +11,7 @@ life = GameOfLife(r_shift, g_shift, b_shift)
 
 
 def run_unicorn_loop():
+    global life
     life.next_generation()
     life.show_board()
     if life.all_dead():
