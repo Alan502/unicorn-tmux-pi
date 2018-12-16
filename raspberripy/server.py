@@ -4,12 +4,15 @@ import unicornhat as unicorn
 from game_of_life import GameOfLife
 import time
 
-life = GameOfLife(0)
+shift = 0
+life = GameOfLife(shift)
 
 
 def run_unicorn_loop():
     life.next_generation()
     life.show_board()
+    if life.all_dead():
+        life = GameOfLife(shift)
 
 
 class S(BaseHTTPRequestHandler):
@@ -38,7 +41,6 @@ class S(BaseHTTPRequestHandler):
             life = GameOfLife(shift)
         if in_text.startswith('random'):
             pass
-
         self.wfile.write(in_text)
 
 

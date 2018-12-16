@@ -27,9 +27,9 @@ class GameOfLife:
         self.color = blue
         for color in blue:
             unit = 32 # 256 / 8
-            color[0] = color[0] + shift*unit
-            color[1] = color[1] + shift*unit
-            color[2] = color[2] + shift*unit
+            color[0] = (color[0] + shift*unit) % 256
+            color[1] = (color[1] + shift*unit) % 256
+            color[2] = (color[2] + shift*unit) % 256
 
     def value(self, x, y):
         index = ((x % width) * height) + (y % height)
