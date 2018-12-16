@@ -6,11 +6,11 @@ import time
 
 life = GameOfLife(0)
 
+
 def run_unicorn_loop():
     life.next_generation()
     life.show_board()
-    time.sleep(1)
-    return True
+
 
 class S(BaseHTTPRequestHandler):
     """unicorn tmux pi webserver, serves the routes that control the unicorn phat through http
@@ -19,7 +19,7 @@ class S(BaseHTTPRequestHandler):
     def _set_headers(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
-        self.end_headers()  
+        self.end_headers()
 
     def do_GET(self):
         self._set_headers()
@@ -35,7 +35,7 @@ class S(BaseHTTPRequestHandler):
                 shift = int(in_text[11])
             except IndexError:
                 shift = 0
-        life = GameOfLife(shift)
+            life = GameOfLife(shift)
         if in_text.startswith('random'):
             pass
 
@@ -46,7 +46,9 @@ def run(server_class=HTTPServer, handler_class=S, port=61002):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print 'unicorn tmux pi running...'
-    while run_unicorn_loop():
+    httpd.timeout = 1
+    httpd.handle_timeout = run_unicorn_loop
+    while True:
         httpd.handle_request()
 
 
