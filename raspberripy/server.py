@@ -4,15 +4,17 @@ import unicornhat as unicorn
 from game_of_life import GameOfLife
 import time
 
-shift = 0
-life = GameOfLife(shift)
+r_shift = 0
+g_shift = 0
+b_shift = 0
+life = GameOfLife(r_shift, g_shift, b_shift)
 
 
 def run_unicorn_loop():
     life.next_generation()
     life.show_board()
     if life.all_dead():
-        life = GameOfLife(shift)
+        life = GameOfLife(r_shift, g_shift, b_shift)
 
 
 class S(BaseHTTPRequestHandler):
@@ -31,14 +33,18 @@ class S(BaseHTTPRequestHandler):
         self.wfile.write("https://github.com/Alan502/unicorn-tmux-pi\n")
 
     def do_POST(self):
+        global life
+        global r_shift
+        global g_shift
+        global b_shift
         self._set_headers()
-        in_text = self.rfile.read()
+        content_length = int(self.headers['Content-length'])
+        in_text = self.rfile.read(content_length)
         if in_text.startswith('gameoflife'):
-            try:
-                shift = int(in_text[11])
-            except IndexError:
-                shift = 0
-            life = GameOfLife(shift)
+            r_shift = int(in_text[11])
+            g_shift = int(in_text[13])
+            b_shift = int(in_text[15])
+            life = GameOfLife(r_shift, g_shift, b_shift)
         if in_text.startswith('random'):
             pass
         self.wfile.write(in_text)

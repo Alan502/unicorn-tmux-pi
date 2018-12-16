@@ -22,14 +22,14 @@ class GameOfLife:
     """Adapted from https://github.com/pimoroni/unicorn-hat/blob/master/examples/game_of_life.py
     to include a shift parameter.
     """
-    def __init__(self, shift=0):
+    def __init__(self, r_shift=0, g_shift=0, b_shift=0):
         self.board = [int(7 * random.getrandbits(1)) for _ in xrange(size)]
         self.color = blue
-        for color in blue:
+        for color in self.color:
             unit = 32 # 256 / 8
-            color[0] = (color[0] + shift*unit) % 256
-            color[1] = (color[1] + shift*unit) % 256
-            color[2] = (color[2] + shift*unit) % 256
+            color[0] = (color[0] + r_shift*unit) % 256
+            color[1] = (color[1] + g_shift*unit) % 256
+            color[2] = (color[2] + b_shift*unit) % 256
 
     def value(self, x, y):
         index = ((x % width) * height) + (y % height)
