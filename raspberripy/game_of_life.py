@@ -77,10 +77,3 @@ class GameOfLife:
                rgb = self.color[self.value(i, j)]
                unicorn.set_pixel(i, j, rgb[0], rgb[1], rgb[2])
         unicorn.show()
-
-shift = random.randint(0,7)
-life = GameOfLife(shift)
-while not life.all_dead():
-    life.next_generation()
-    life.show_board()
-    time.sleep(1)
