@@ -1,5 +1,5 @@
 # unicorn-tmux-pi
-A program that assigns unicorn animations to each one of your tmux panes.
+A program that assigns unicorn animations to each one of your tmux panes. It generates a random conway's game of life board with a color palette and generation frequency distict for that specific pane. The program remembers the color pallete and frequency and sets that configuration each time that pane is focused.
 
 ## Installation
 
