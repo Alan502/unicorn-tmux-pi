@@ -1,0 +1,10 @@
+[Unit]
+Description=Unicorn tmux pi
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /home/pi/.unicorntmuxpi/server/server.py
+
+[Install]
+WantedBy=multi-user.target

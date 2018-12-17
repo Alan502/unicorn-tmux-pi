@@ -48,10 +48,11 @@ class S(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-length'])
         in_text = self.rfile.read(content_length)
         if in_text.startswith('gameoflife'):
-            r_shift = int(in_text[11])
-            g_shift = int(in_text[13])
-            b_shift = int(in_text[15])
-            period = int(in_text[17])
+            in_args = in_text.split()
+            r_shift = int(in_args[1])
+            g_shift = int(in_args[2])
+            b_shift = int(in_args[3])
+            period = int(in_args[4])
             life = GameOfLife(r_shift, g_shift, b_shift)
         if in_text.startswith('random'):
             pass
