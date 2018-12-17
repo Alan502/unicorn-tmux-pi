@@ -25,6 +25,10 @@ This will copy the python server that receives the client's commands into a loca
 
 This will append the configurations needed to listen for focus events on tmux and the execution of client commands to trigger the raspberry pi animations.
 
+## Demo
+
+View demo on youtube: https://youtu.be/JMdNZsYVP6o
+
 ## Help, FAQ & Feature requests
 
 For help and feature requests, file an issue to this repository. I will respond within 2 days.
