@@ -7,6 +7,8 @@ There are two parts of the installation: installation of the raspberry pi server
 
 ### Raspberry pi
 
+The script assumes that the raspberry pi has a headless configuration and available through raspberrypi.local. If your configuration is different, you might have to adjust the domain where the webserver serves on raspberrypi/server/server.py.
+
 1. Clone the repository into /home/pi.
 2. Run the installation script:
 
