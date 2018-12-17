@@ -14,3 +14,5 @@ if [ -e ~/.zshrc ]
 then
 echo $cmd >> ~/.zshrc
 fi
+
+echo "Installation done!"
