@@ -17,5 +17,8 @@ period=`expr 1 + $period`
 conf="$r $g $b $period"
 tmux set -q "@unicorn_conf_$1" "$conf"
 fi
-# conf=`tmux show -v "@unicorn_conf_$TMUX_PANE"`
+# send the command raspberry pi
 curl -d "gameoflife $conf" raspberrypi.local:61002
+# comment the line above and uncomment the line after this comment
+# to send commands through ssh_manager instead:
+# curl -d "curl -d 'gameoflife $conf' localhost:61002" localhost:61002
