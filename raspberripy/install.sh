@@ -1,6 +1,6 @@
 # copy the server to your home directory
 mkdir -p /home/pi/.unicorntmuxpi/
-cp server /home/pi/.unicorntmuxpi/
+cp -r server /home/pi/.unicorntmuxpi/
 # copy the systemd definition to the systemd directoy
 cp unicorntmuxpi.service /lib/systemd/system/unicorntmuxpi.service
 # adjusts permissions
